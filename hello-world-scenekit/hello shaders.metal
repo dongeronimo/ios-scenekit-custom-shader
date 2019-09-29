@@ -16,8 +16,11 @@ typedef struct {
 struct SimpleVertex
 {
     float4 position [[position]];
+    //Essas vars, por não terem  o [[]] são interpoladas.
+    float r;
+    float g;
+    float b;
 };
-
 
 vertex SimpleVertex myVertex(MyVertexInput in [[ stage_in ]],
                              constant SCNSceneBuffer& scn_frame [[buffer(0)]],
@@ -25,14 +28,17 @@ vertex SimpleVertex myVertex(MyVertexInput in [[ stage_in ]],
 {
     SimpleVertex vert;
     vert.position = scn_node.modelViewProjectionTransform * float4(in.position, 1.0);
-    
+    vert.r = in.position.x;
+    vert.g = in.position.y;
+    vert.b = in.position.b;
     return vert;
 }
 
-fragment half4 myFragment(SimpleVertex in [[stage_in]])
+fragment float4 myFragment(SimpleVertex in [[stage_in]])
 {
-    half4 color;
-    color = half4(1.0 ,1.0 ,0.0, 1.0);
+    float4 color;
+
+    color = float4(in.r, in.g, in.b, 1.0);
     
     return color;
 }

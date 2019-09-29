@@ -36,6 +36,7 @@ As mentioned above, SCNProgram has two properties that can have the names of the
 
 ## Results:
 The yellow box is using my simple shader.
+![alt text](https://github.com/dongeronimo/ios-scenekit-custom-shader/raw/master/IMG_2645.jpg "Final Result")
 
 
 

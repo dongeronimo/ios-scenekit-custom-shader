@@ -19,19 +19,27 @@ class MainViewController: UIViewController {
         sceneView.backgroundColor = UIColor.black
         sceneView.autoenablesDefaultLighting = true
         sceneView.allowsCameraControl = true
-        testShader(myScene: myScene)
+        useCustomShaderProgram(myScene: myScene)
+        useShaderExtensions(myScene: myScene)
     }
-    private func testShader(myScene: SCNScene){
+    private func useCustomShaderProgram(myScene: SCNScene){
         //Search for the shaderBox
         let shaderBox: SCNNode = myScene.rootNode.childNode(withName: "shader box", recursively: true)!
         let program: SCNProgram = SCNProgram()//Instancia o objeto de programa
         program.fragmentFunctionName = "myFragment"
         program.vertexFunctionName = "myVertex"
         
-        //.... http://dontpad.com/geronimol
         shaderBox.geometry!.firstMaterial?.program = program//Passa pro shaderBox
     }
-    
+    private func useShaderExtensions(myScene: SCNScene){
+        //the experiment box
+        let shaderExtensionBox: SCNNode = myScene.rootNode.childNode(withName: "shader extension box", recursively: true)!
+        shaderExtensionBox.geometry!.shaderModifiers = [.fragment:
+        """
+            _output.color.rgb = float3(1.0, 1.0. 0.0);
+        """]
+        
+    }
     @IBAction func onTap(_ sender: UITapGestureRecognizer) {
         let p = sender.location(in: sceneView)
         let hitResults = sceneView.hitTest(p, options: [:])

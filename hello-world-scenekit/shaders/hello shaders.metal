@@ -11,12 +11,16 @@ struct MyNodeBuffer {
 
 typedef struct {
     float3 position [[ attribute(SCNVertexSemanticPosition) ]];
+    float3 normal   [[ attribute(SCNVertexSemanticNormal) ]];
+    float2 texcoord0 [[ attribute(SCNVertexSemanticTexcoord0) ]];
+    float2 texcoord1 [[ attribute(SCNVertexSemanticTexcoord1) ]];
+    float2 texcoord2 [[ attribute(SCNVertexSemanticTexcoord2) ]];
 } MyVertexInput;
 
 struct SimpleVertex
 {
     float4 position [[position]];
-    //Essas vars, por não terem  o [[]] são interpoladas.
+    //Essas vars, por não terem  o [[]] são interpoladas, náo são atributos
     float r;
     float g;
     float b;
